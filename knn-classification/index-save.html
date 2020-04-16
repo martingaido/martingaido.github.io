@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNN Classification (save model)</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+
+
+    <style>
+        #label {
+            background-color: aquamarine;
+            position: absolute;
+            padding: 10px 10px 10px 10px;
+            background-color: aqua;
+        }
+
+        #confidence {
+            background-color: aquamarine;
+            position: absolute;
+            margin-top: 40px;
+            padding: 10px 10px 10px 10px;
+            background-color: bisque;
+        }
+
+        #info {
+            position: absolute;
+            margin-top: 500px;;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="label">...</div>
+    <div id="confidence">...</div>
+    
+    <div id="info">
+        Keys<br><br>
+        r = right<br>
+        l = left<br>
+        u = up<br>
+        d = down<br>
+        s = save<br>
+    </div>
+
+    <script src="js/script-save.js"></script>
+</body>
+</html>
