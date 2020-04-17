@@ -26,12 +26,10 @@ const divConfidence = document.getElementById('confidence');
 
 function modelReady() {
     console.log('Model is ready!');
-    // mobilenet.predict(gotResults);
 }
 
 function videoReady() {
     console.log('Video is ready!');
-    // mobilenet.predict(gotResults);
 }
 
 function setup() {
@@ -41,34 +39,31 @@ function setup() {
     video.hide();
     background(0);
 
-
-
     features = ml5.featureExtractor('MobileNet', modelReady);
-    // classifier = mobilenet.classification(video, videoReady);
     knn = ml5.KNNClassifier();
-
 }
 
 function goClassify() {
+    
     const logits = features.infer(video);
+    
     knn.classify(logits, function (error, result) {
         
         if(error) {
+
             console.error(error);
+        
         } else {
-            
-            // console.log(result);
-            
+        
             divLabel.innerHTML = `${result.label}`;
-            // divConfidence.innerHTML = `${result.confidences}`;
             goClassify();
         }
     });
 }
 
-// train with left and right keys
 function keyPressed() {
-    // digita fingerprints of the captured video frame or image
+
+    /* Digital fingerprints of the captured video frame or image */
     const logits = features.infer(video);
     
     if(key == 'l') {
@@ -95,24 +90,20 @@ function keyPressed() {
         knn.save('model.json');
         console.log('Model Saved');
     }
-
-    //console.log(logits);
 }
 
-// draw method from p5
 function draw() {
 
     image(video, 0, 0);
     
-    // horizontal axis
+    /* Horizontal Axis (x) */
     line(0, 240, 640, 240);
     strokeWeight(2);
     
-    // vertical axis
+    /* Vertical Axis (y) */
     line(320, 0, 320, 480);
     strokeWeight(2);
 
-    // line colors
     stroke('rgb(0,255,0)');
 
     if(!ready && knn.getNumLabels() > 0) {

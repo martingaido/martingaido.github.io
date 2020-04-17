@@ -21,11 +21,11 @@ const divLabel = document.getElementById('label');
 const divConfidence = document.getElementById('confidence');
 
 function modelReady() {
-    console.log('Model is ready!');
+    console.log('Model is ready.');
 }
 
 function videoReady() {
-    console.log('Video is ready!');
+    console.log('Video is ready.');
 }
 
 function whileTraining(loss) {

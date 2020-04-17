@@ -30,15 +30,6 @@ function videoReady() {
     classifier.classify(gotResults);
 }
 
-// function whileTraining(loss) {
-//     if(loss === null) {
-//         console.log('Training Complete');
-//         classifier.classify(gotResults);
-//     } else {
-//         console.log(loss);
-//     }
-// }
-
 function gotResults(error, results) {
 
     if(error) {

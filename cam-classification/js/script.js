@@ -47,7 +47,6 @@ function setup() {
     mobilenet = ml5.imageClassifier('MobileNet', video, modelReady);
 }
 
-/* Draw function from P5 */
 function draw() {
     image(video, 0, 0);
 }

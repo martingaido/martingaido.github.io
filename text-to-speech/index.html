@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text to Speech</title>
+</head>
+<body>
+    
+    Select Voice: <select id='voiceList'></select> <br><br>
+
+    <input id='txtInput' /> <br><br>    
+    <button id='btnSpeak'>Speak!</button>
+
+    <script>
+
+        let txtInput  = document.querySelector('#txtInput');
+        let voiceList = document.querySelector('#voiceList');
+        let btnSpeak  = document.querySelector('#btnSpeak');
+        let synth     = window.speechSynthesis;
+        let voices    = [];
+
+        PopulateVoices();
+        
+        if(speechSynthesis !== undefined){
+            speechSynthesis.onvoiceschanged = PopulateVoices;
+        }
+
+        btnSpeak.addEventListener('click', ()=> {
+            
+            let toSpeak = new SpeechSynthesisUtterance(txtInput.value);
+            let selectedVoiceName = voiceList.selectedOptions[0].getAttribute('data-name');
+            voices.forEach((voice)=>{
+                if(voice.name === selectedVoiceName){
+                    console.log(voice);
+                    toSpeak.voice = voice;
+                }
+            });
+            synth.speak(toSpeak);
+        });
+
+        function PopulateVoices(){
+
+            voices = synth.getVoices();
+            let selectedIndex = voiceList.selectedIndex < 0 ? 0 : voiceList.selectedIndex;
+            voiceList.innerHTML = '';
+            voices.forEach((voice)=>{
+                let listItem = document.createElement('option');
+                listItem.textContent = voice.name;
+                listItem.setAttribute('data-lang', voice.lang);
+                listItem.setAttribute('data-name', voice.name);
+                voiceList.appendChild(listItem);
+            });
+
+            voiceList.selectedIndex = selectedIndex;
+        }
+    </script>
+</body>
+</html>

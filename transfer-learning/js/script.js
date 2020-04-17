@@ -21,17 +21,15 @@ const divConfidence = document.getElementById('confidence');
 
 function modelReady() {
     console.log('Model is ready.');
-    mobilenet.predict(gotResults);
 }
 
 function videoReady() {
     console.log('Video is ready.');
-    mobilenet.predict(gotResults);
 }
 
 function whileTraining(loss) {
     if(loss === null) {
-        console.log('Training complete');
+        console.log('Training complete!');
         classifier.classify(gotResults);
     } else {
         console.log(loss);

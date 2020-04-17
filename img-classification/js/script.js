@@ -24,7 +24,5 @@ classifier.classify(document.getElementById('image'), (err, results) => {
 
     divLabel.innerHTML = `[0]: ${results[0].label}, [1]: ${results[1].label}, [2]: ${results[2].label}`;
     divConfidence.innerHTML = `[0]: ${results[0].confidence}`;
-
-    /* Show results in console */
-    // console.log(results);
+    
 });
