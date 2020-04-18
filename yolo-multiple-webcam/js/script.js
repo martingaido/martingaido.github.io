@@ -65,11 +65,16 @@ function draw() {
 
     for (let i = 0; i < objects.length; i++) {
 
+		console.log();
+
         noStroke();
         fill(0, 255, 0);
 		text(objects[i].label, objects[i].x * width, objects[i].y * height - 5);
+
 		divLabel.innerHTML = `${objects[i].label}`;
-        noFill();
+		divConfidence.innerHTML = `${objects[i].confidence}`;
+
+		noFill();
         strokeWeight(4);
         stroke(0, 255, 0);
         rect(objects[i].x * width, objects[i].y * height, objects[i].w * width, objects[i].h * height);
@@ -77,7 +82,8 @@ function draw() {
 }
 
 function startDetecting() {
-    console.log('Model is ready.');
+	console.log('Model is ready.');
+	divLabel.innerHTML = `Model is ready.`;
     detect();
 }
 
