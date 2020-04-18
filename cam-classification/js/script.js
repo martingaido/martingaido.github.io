@@ -13,17 +13,12 @@
 */
 
 let mobilenet;
-// let video;
 
 const video = document.getElementById('video');
-// const canvas = document.getElementById('canvas');
-// const context = canvas.getContext('2d');
-
 const divLabel = document.getElementById('label');
 const divConfidence = document.getElementById('confidence');
-
-const frontcam = document.getElementById('frontcam');
-const rearcam = document.getElementById('rearcam');
+const frontCam = document.getElementById('frontcam');
+const rearCam = document.getElementById('rearcam');
 
 function modelReady() {
     console.log('Model is ready.');
@@ -56,21 +51,13 @@ async function setup(selectedMode) {
 	});
 
 	video.srcObject = stream;
-
-    //createCanvas(300, 300);
-    //video = createCapture(VIDEO);
-    //video.hide();
-    //background(0);
     mobilenet = ml5.imageClassifier('MobileNet', video, modelReady);
 }
 
-frontcam.addEventListener('click', () => {
+frontCam.addEventListener('click', () => {
 	setup('user');
 });
 
-rearcam.addEventListener('click', () => {
+rearCam.addEventListener('click', () => {
 	setup('environment');
-})
-// function draw() {
-//     image(stream, 0, 0);
-// }
+});
