@@ -13,10 +13,17 @@
 */
 
 let mobilenet;
-let video;
+// let video;
+
+const video = document.getElementById('video');
+// const canvas = document.getElementById('canvas');
+// const context = canvas.getContext('2d');
 
 const divLabel = document.getElementById('label');
 const divConfidence = document.getElementById('confidence');
+
+const frontcam = document.getElementById('frontcam');
+const rearcam = document.getElementById('rearcam');
 
 function modelReady() {
     console.log('Model is ready.');
@@ -39,14 +46,31 @@ function gotResults(error, results) {
     }
 }
 
-function setup() {
-    createCanvas(640, 480);
-    video = createCapture(VIDEO);
-    video.hide();
-    background(0);
+async function setup(selectedMode) {
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+		audio: false,
+		video: {
+			facingMode : selectedMode
+		}
+	});
+
+	video.srcObject = stream;
+
+    //createCanvas(300, 300);
+    //video = createCapture(VIDEO);
+    //video.hide();
+    //background(0);
     mobilenet = ml5.imageClassifier('MobileNet', video, modelReady);
 }
 
-function draw() {
-    image(video, 0, 0);
-}
+frontcam.addEventListener('click', () => {
+	setup('user');
+});
+
+rearcam.addEventListener('click', () => {
+	setup('environment');
+})
+// function draw() {
+//     image(stream, 0, 0);
+// }

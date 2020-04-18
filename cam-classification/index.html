@@ -8,7 +8,16 @@
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
     <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
 
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
     <style>
+		body {
+			margin: 0px 0px 0px 0px;
+			background-color: black;
+		}
+
         #label {
             background-color: aquamarine;
             position: absolute;
@@ -23,14 +32,47 @@
             padding: 10px 10px 10px 10px;
             background-color: bisque;
         }
+
+		#controls {
+			position: fixed;
+			right: 20px;
+			bottom: 20px;
+			/* transform: translate(-50%, -50%); */
+			margin: 0 auto;
+		}
+
+        video {
+            width: 100%;
+			height: 100%;
+            position: absolute;
+        }
     </style>
 
 </head>
 <body>
 
+	<video id="video" width="100%" height="100%" autoplay muted playsinline></video>
+	<!-- <canvas id="canvas" style="display: none;"></canvas> -->
+
     <div id="label"> ... </div>
     <div id="confidence"> ... </div>
-    
+
+	<div id="controls">
+
+		<!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+			<input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+			<span class="mdl-switch__label"></span>
+		</label> -->
+
+		<button id="frontcam" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+			Front Cam
+		</button>
+
+		<button id="rearcam" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+			Rear Cam
+		</button>
+	</div>
+
     <script src="js/script.js"></script>
 </body>
 </html>
