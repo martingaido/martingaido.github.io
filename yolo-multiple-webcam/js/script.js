@@ -21,9 +21,11 @@ let canvas;
 // const divConfidence = document.getElementById('confidence');
 const frontCam = document.getElementById('frontcam');
 const rearCam = document.getElementById('rearcam');
+const detectButton = document.getElementById('detectButton');
 
 const divLabel = document.getElementById('label');
 const divConfidence = document.getElementById('confidence');
+
 
 function setup(selectedMode) {
 
@@ -84,7 +86,7 @@ function draw() {
 function startDetecting() {
 	console.log('Model is ready.');
 	divLabel.innerHTML = `Model is ready.`;
-    detect();
+    // detect();
 }
 
 function detect() {
@@ -102,4 +104,8 @@ frontCam.addEventListener('click', () => {
 rearCam.addEventListener('click', () => {
 	video.remove();
 	setup('environment');
+});
+
+detectButton.addEventListener('click', () => {
+	detect();
 });
