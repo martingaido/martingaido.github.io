@@ -22,8 +22,8 @@ let canvas;
 const frontCam = document.getElementById('frontcam');
 const rearCam = document.getElementById('rearcam');
 
-// const divLabel = document.getElementById('label');
-// const divConfidence = document.getElementById('confidence');
+const divLabel = document.getElementById('label');
+const divConfidence = document.getElementById('confidence');
 
 function setup(selectedMode) {
 
@@ -67,7 +67,8 @@ function draw() {
 
         noStroke();
         fill(0, 255, 0);
-        text(objects[i].label, objects[i].x * width, objects[i].y * height - 5);
+		text(objects[i].label, objects[i].x * width, objects[i].y * height - 5);
+		divLabel.innerHTML = `${objects[i].label}`;
         noFill();
         strokeWeight(4);
         stroke(0, 255, 0);
