@@ -28,23 +28,35 @@
 		});
 
 
-		/* Acceleration / Motion */
-		window.addEventListener('devicemotion', (v3) => {
-			console.info(v3);
-			document.getElementById('accel').innerHTML = `Acceleration: X: ${v3.acceleration.x}, Y: ${v3.acceleration.y}, Z: ${v3.acceleration.z}`;
-			document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${v3.rotationRate.alpha}, ß: ${v3.rotationRate.beta}, Γ: ${v3.rotationRate.gamma}`;
+		navigator.permissions.query({ name: 'accelerometer' })
+		.then(result => {
+
+			if (result.state === 'denied') {
+				console.log('Permission to use accelerometer sensor is denied.');
+				return;
+			}
+
+			/* Acceleration / Motion */
+			window.addEventListener('devicemotion', (v3) => {
+				console.info(v3);
+				document.getElementById('accel').innerHTML = `Acceleration: X: ${v3.acceleration.x}, Y: ${v3.acceleration.y}, Z: ${v3.acceleration.z}`;
+				document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${v3.rotationRate.alpha}, ß: ${v3.rotationRate.beta}, Γ: ${v3.rotationRate.gamma}`;
+			});
 		});
 
 
-		let acl = new Accelerometer({frequency: 60});
 
-		acl.addEventListener('reading', () => {
-			console.log("Acceleration along the X-axis " + acl.x);
-			console.log("Acceleration along the Y-axis " + acl.y);
-			console.log("Acceleration along the Z-axis " + acl.z);
-		});
 
-		acl.start();
+		// let acl = new Accelerometer({frequency: 60});
+
+		// acl.addEventListener('reading', () => {
+
+		// 	console.log("Acceleration along the X-axis " + acl.x);
+		// 	console.log("Acceleration along the Y-axis " + acl.y);
+		// 	console.log("Acceleration along the Z-axis " + acl.z);
+		// });
+
+		// acl.start();
 	</script>
 
 </head>
@@ -66,7 +78,11 @@
 
 	<h2>Acceleration</h2>
 	<div id="accel"></div><br>
-	<div id="rotationRate"></div><br>
+	<div id="rotationRate"></div><br><br>
+
+	<div id="x1"></div><br>
+	<div id="y1"></div><br>
+	<div id="z1"></div><br>
 
 </body>
 </html>
