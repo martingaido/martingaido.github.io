@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Phone Sensors</title>
+
+	<script>
+
+		/* Screen Orientation */
+		window.addEventListener('orientationchange', (v) => {
+
+			/* Approach: Compare height / width to determine orientation */
+			var isLandscape = (window.innerHeight > window.innerWidth);
+
+			if(isLandscape) {
+				document.getElementById('screenOrientation').innerHTML = `<strong>Landscape</strong>`;
+			} else {
+				document.getElementById('screenOrientation').innerHTML = `<strong>Portrait</strong>`;
+			}
+		});
+
+		/* Device Orientation */
+		window.addEventListener('deviceorientation', (v) => {
+			document.getElementById('alpha').innerHTML = `Alpha (α): ${v.alpha}`;
+			document.getElementById('beta').innerHTML  = `Beta (ß): ${v.beta}`;
+			document.getElementById('gamma').innerHTML = `Gamma (Γ): ${v.gamma}`;
+		});
+
+
+		/* Acceleration / Motion */
+		window.addEventListener('devicemotion', (v) => {
+			console.info(v);
+			document.getElementById('accel').innerHTML = `Acceleration: X: ${v.acceleration.x}, Y: ${v.acceleration.y}, Z: ${v.acceleration.z}`;
+			document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${v.rotationRate.alpha}, ß: ${v.rotationRate.beta}, Γ: ${v.rotationRate.gamma}`;
+		});
+	</script>
+
+</head>
+<body>
+
+	Better to see it in a mobile device.
+
+	<h2>Screen Orientation</h2>
+	<div id="screenOrientation"></div>
+
+	<br><br>
+
+	<h2>Device Orientation</h2>
+	<div id="alpha"></div><br>
+	<div id="beta"></div><br>
+	<div id="gamma"></div>
+
+	<br><br>
+
+	<h2>Acceleration</h2>
+	<div id="accel"></div><br>
+	<div id="rotationRate"></div><br>
+
+</body>
+</html>
