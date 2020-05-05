@@ -22,24 +22,23 @@
 
 
 		/* Device Orientation */
-		if (window.DeviceOrientationEvent) {
-			window.addEventListener("deviceorientation", function(event) {
-				// alpha: rotation around z-axis
-				var rotateDegrees = event.alpha;
-				// gamma: left to right
-				var leftToRight = event.gamma;
-				// beta: front back motion
-				var frontToBack = event.beta;
-
-				handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
-			}, true);
-		}
-
 		var handleOrientationEvent = function(frontToBack, leftToRight, rotateDegrees) {
+
 			document.getElementById('alpha').innerHTML = `Alpha (α): ${rotateDegrees}`;
-			document.getElementById('beta').innerHTML    = `Beta (ß): ${frontToBack}`;
-			document.getElementById('gamma').innerHTML   = `Gamma (Γ): ${leftToRight}`;
+			document.getElementById('beta').innerHTML  = `Beta (ß): ${frontToBack}`;
+			document.getElementById('gamma').innerHTML = `Gamma (Γ): ${leftToRight}`;
 		};
+
+		window.addEventListener("deviceorientation", function(event) {
+			// alpha: rotation around z-axis
+			var rotateDegrees = event.alpha;
+			// gamma: left to right
+			var leftToRight = event.gamma;
+			// beta: front back motion
+			var frontToBack = event.beta;
+
+			handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
+		}, true);
 
 
 		/* Acceleration / Motion */
