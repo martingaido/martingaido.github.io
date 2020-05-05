@@ -1,5 +1,4 @@
 	
 	# martingaido.github.io
-	Martin Gaido @ GitHub
 
-	cam-classification
+	Martin Gaido <martin.gaido@gmail.com>
