@@ -8,7 +8,7 @@
 	<script>
 
 		/* Screen Orientation */
-		window.addEventListener('orientationchange', function(v1) {
+		window.addEventListener('orientationchange', function(val) {
 
 			/* Approach: Compare height / width to determine orientation */
 			var isLandscape = (window.innerHeight > window.innerWidth);
@@ -21,63 +21,37 @@
 		});
 
 
-		if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-			DeviceOrientationEvent.requestPermission()
-			.then(permissionState => {
-				if (permissionState === 'granted') {
-					/* Device Orientation */
-					window.addEventListener('deviceorientation', function(v2) {
-						document.getElementById('alpha').innerHTML   = `Alpha (α): ${v2.alpha}`;
-						document.getElementById('beta').innerHTML    = `Beta (ß): ${v2.beta}`;
-						document.getElementById('gamma').innerHTML   = `Gamma (Γ): ${v2.gamma}`;
-						document.getElementById('debugV2').innerHTML = JSON.stringify(v2);
-					});
-				}
-			})
-			.catch(console.error);
+		window.addEventListener('deviceorientation', function(val) {
+			document.getElementById('alpha').innerHTML   = `Alpha (α): ${val.alpha}`;
+			document.getElementById('beta').innerHTML    = `Beta (ß): ${val.beta}`;
+			document.getElementById('gamma').innerHTML   = `Gamma (Γ): ${val.gamma}`;
+		});
 
-		} else {
 
-			// handle regular non iOS 13+ devices
-			window.addEventListener('deviceorientation', function(v2) {
-				document.getElementById('alpha').innerHTML   = `Alpha (α): ${v2.alpha}`;
-				document.getElementById('beta').innerHTML    = `Beta (ß): ${v2.beta}`;
-				document.getElementById('gamma').innerHTML   = `Gamma (Γ): ${v2.gamma}`;
-				document.getElementById('debugV2').innerHTML = JSON.stringify(v2);
-			});
+		/* Acceleration / Motion */
+		// window.addEventListener('devicemotion', function(val) {
+		// 	document.getElementById('accel').innerHTML = `Acceleration: X: ${val.acceleration.x}, Y: ${val.acceleration.y}, Z: ${val.acceleration.z}`;
+		// 	document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${val.rotationRate.alpha}, ß: ${val.rotationRate.beta}, Γ: ${val.rotationRate.gamma}`;
+		// });
+
+
+		function handleMotionEvent(event) {
+
+			var x = event.accelerationIncludingGravity.x;
+			var y = event.accelerationIncludingGravity.y;
+			var z = event.accelerationIncludingGravity.z;
+
+			document.getElementById('accel').innerHTML = `Acceleration: X: ${x}, Y: ${y}, Z: ${z}`;
 		}
 
-
-		if (typeof DeviceMotionEvent.requestPermission === 'function') {
-
-			DeviceMotionEvent.requestPermission()
-			.then(permissionState => {
-				if (permissionState === 'granted') {
-
-					/* Acceleration / Motion */
-					window.addEventListener('devicemotion', function(v3) {
-						document.getElementById('accel').innerHTML = `Acceleration: X: ${v3.acceleration.x}, Y: ${v3.acceleration.y}, Z: ${v3.acceleration.z}`;
-						document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${v3.rotationRate.alpha}, ß: ${v3.rotationRate.beta}, Γ: ${v3.rotationRate.gamma}`;
-					});
-				}
-			})
-			.catch(console.error);
-
-		} else {
-
-			// handle regular non iOS 13+ devices
-			window.addEventListener('devicemotion', function(v3) {
-				document.getElementById('accel').innerHTML = `Acceleration: X: ${v3.acceleration.x}, Y: ${v3.acceleration.y}, Z: ${v3.acceleration.z}`;
-				document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${v3.rotationRate.alpha}, ß: ${v3.rotationRate.beta}, Γ: ${v3.rotationRate.gamma}`;
-			});
-		}
+		window.addEventListener("devicemotion", handleMotionEvent, true);
 
 	</script>
 
 </head>
 <body>
 
-	Better to see it in a mobile device.
+	Test it using a mobile device.
 
 	<h2>Screen Orientation</h2>
 	<div id="screenOrientation"></div>
