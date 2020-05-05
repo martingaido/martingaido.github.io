@@ -8,7 +8,7 @@
 	<script>
 
 		/* Screen Orientation */
-		window.addEventListener('orientationchange', (v) => {
+		window.addEventListener('orientationchange', (v1) => {
 
 			/* Approach: Compare height / width to determine orientation */
 			var isLandscape = (window.innerHeight > window.innerWidth);
@@ -21,19 +21,30 @@
 		});
 
 		/* Device Orientation */
-		window.addEventListener('deviceorientation', (v) => {
-			document.getElementById('alpha').innerHTML = `Alpha (α): ${v.alpha}`;
-			document.getElementById('beta').innerHTML  = `Beta (ß): ${v.beta}`;
-			document.getElementById('gamma').innerHTML = `Gamma (Γ): ${v.gamma}`;
+		window.addEventListener('deviceorientation', (v2) => {
+			document.getElementById('alpha').innerHTML = `Alpha (α): ${v2.alpha}`;
+			document.getElementById('beta').innerHTML  = `Beta (ß): ${v2.beta}`;
+			document.getElementById('gamma').innerHTML = `Gamma (Γ): ${v2.gamma}`;
 		});
 
 
 		/* Acceleration / Motion */
-		window.addEventListener('devicemotion', (v) => {
-			console.info(v);
-			document.getElementById('accel').innerHTML = `Acceleration: X: ${v.acceleration.x}, Y: ${v.acceleration.y}, Z: ${v.acceleration.z}`;
-			document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${v.rotationRate.alpha}, ß: ${v.rotationRate.beta}, Γ: ${v.rotationRate.gamma}`;
+		window.addEventListener('devicemotion', (v3) => {
+			console.info(v3);
+			document.getElementById('accel').innerHTML = `Acceleration: X: ${v3.acceleration.x}, Y: ${v3.acceleration.y}, Z: ${v3.acceleration.z}`;
+			document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${v3.rotationRate.alpha}, ß: ${v3.rotationRate.beta}, Γ: ${v3.rotationRate.gamma}`;
 		});
+
+
+		let acl = new Accelerometer({frequency: 60});
+
+		acl.addEventListener('reading', () => {
+			console.log("Acceleration along the X-axis " + acl.x);
+			console.log("Acceleration along the Y-axis " + acl.y);
+			console.log("Acceleration along the Z-axis " + acl.z);
+		});
+
+		acl.start();
 	</script>
 
 </head>
