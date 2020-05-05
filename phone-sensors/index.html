@@ -21,27 +21,37 @@
 		});
 
 
-		window.addEventListener('deviceorientation', function(val) {
-			document.getElementById('alpha').innerHTML   = `Alpha (α): ${val.alpha}`;
-			document.getElementById('beta').innerHTML    = `Beta (ß): ${val.beta}`;
-			document.getElementById('gamma').innerHTML   = `Gamma (Γ): ${val.gamma}`;
-		});
+		/* Device Orientation */
+		if (window.DeviceOrientationEvent) {
+			window.addEventListener("deviceorientation", function(event) {
+				// alpha: rotation around z-axis
+				var rotateDegrees = event.alpha;
+				// gamma: left to right
+				var leftToRight = event.gamma;
+				// beta: front back motion
+				var frontToBack = event.beta;
+
+				handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
+			}, true);
+		}
+
+		var handleOrientationEvent = function(frontToBack, leftToRight, rotateDegrees) {
+			document.getElementById('alpha').innerHTML = `Alpha (α): ${rotateDegrees}`;
+			document.getElementById('beta').innerHTML    = `Beta (ß): ${frontToBack}`;
+			document.getElementById('gamma').innerHTML   = `Gamma (Γ): ${leftToRight}`;
+		};
 
 
 		/* Acceleration / Motion */
-		// window.addEventListener('devicemotion', function(val) {
-		// 	document.getElementById('accel').innerHTML = `Acceleration: X: ${val.acceleration.x}, Y: ${val.acceleration.y}, Z: ${val.acceleration.z}`;
-		// 	document.getElementById('rotationRate').innerHTML = `Rotation Rate: α: ${val.rotationRate.alpha}, ß: ${val.rotationRate.beta}, Γ: ${val.rotationRate.gamma}`;
-		// });
-
-
 		function handleMotionEvent(event) {
 
 			var x = event.accelerationIncludingGravity.x;
 			var y = event.accelerationIncludingGravity.y;
 			var z = event.accelerationIncludingGravity.z;
 
-			document.getElementById('accel').innerHTML = `Acceleration: X: ${x}, Y: ${y}, Z: ${z}`;
+			document.getElementById('accelX').innerHTML = `x: ${x}`;
+			document.getElementById('accelY').innerHTML = `y: ${y}`;
+			document.getElementById('accelZ').innerHTML = `z: ${z}`;
 		}
 
 		window.addEventListener("devicemotion", handleMotionEvent, true);
@@ -66,8 +76,12 @@
 	<br><br>
 
 	<h2>Acceleration</h2>
-	<div id="accel"></div><br>
-	<div id="rotationRate"></div><br><br>
+	<div id="accelX"></div><br>
+	<div id="accelY"></div><br>
+	<div id="accelZ"></div><br>
+
+	<div id="rotationRate"></div>
+	<br><br>
 
 </body>
 </html>
