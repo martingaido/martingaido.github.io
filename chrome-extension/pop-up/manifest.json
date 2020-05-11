@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "Pop-Up Extension",
+	"version": "1.0",
+	"content_scripts": [
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"js": ["content.js"]
+		}
+	],
+	"browser_action": {
+		"default_icon": "icon-demo.png",
+		"default_popup": "sketch/index.html",
+		"default_title": "A popup will come here"
+	}
+}
