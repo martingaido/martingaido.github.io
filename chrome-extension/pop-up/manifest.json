@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
-	"name": "Pop-Up Extension",
-	"version": "1.0",
+	"name": "Sweeppea Milestones",
+	"version": "4.0",
 	"content_scripts": [
 		{
 			"matches": [
@@ -12,7 +12,7 @@
 	],
 	"browser_action": {
 		"default_icon": "icon-demo.png",
-		"default_popup": "sketch/index.html",
-		"default_title": "A popup will come here"
+		"default_popup": "index.html",
+		"default_title": "Hover text or content..."
 	}
 }
