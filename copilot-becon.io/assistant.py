@@ -166,7 +166,7 @@ def respond(voice_data):
 		exit()
 
 time.sleep(1)
-mario_speak('Hola Roberto, dime lo que necesitas y trataré de ayudarte!')
+mario_speak('Hola Martin, dime lo que necesitas y trataré de ayudarte!')
 while 1:
 	voice_data = record_audio()
 	respond(voice_data)
