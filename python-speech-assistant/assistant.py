@@ -33,7 +33,7 @@ for index, name in enumerate(sr.Microphone.list_microphone_names()):
 def record_audio(ask = False):
 	with sr.Microphone(device_index=0) as source:
 		if ask:
-			mario_speak(ask)
+			assistant_speak(ask)
 		# r.adjust_for_ambient_noise(source)  # listen for 1 second to calibrate the energy threshold for ambient noise levels
 		audio = r.listen(source)
 		voice_data = ''
@@ -54,12 +54,12 @@ def record_audio(ask = False):
 		voice_data = r.recognize_google(audio, language='en-US')
 		print(voice_data)
 	except sr.UnknownValueError:
-		mario_speak("Sorry, I did not get that.")
+		assistant_speak("Sorry, I did not get that.")
 	except sr.RequestError as e:
-		mario_speak("Service not working; {0}".format(e))
+		assistant_speak("Service not working; {0}".format(e))
 	return voice_data
 
-def mario_speak(audio_string):
+def assistant_speak(audio_string):
 	tts = gTTS(text=audio_string, lang='en')
 	r = random.randint(1, 10000000)
 	audio_file = 'tmp-audio-' + str(r) + '.mp3'
@@ -70,12 +70,12 @@ def mario_speak(audio_string):
 
 def respond(voice_data):
 	if 'what is your name' in voice_data:
-		mario_speak('My name is Susan')
+		assistant_speak('My name is Susan')
 	if 'what is my name' in voice_data:
 		ask_back = record_audio('Don\'t know, but tell me so I can remember, what is your name?')
-		mario_speak('Got it, so your name is' + ask_back + ', nice to meet you!')
+		assistant_speak('Got it, so your name is' + ask_back + ', nice to meet you!')
 	if 'what time is it' in voice_data:
-		mario_speak(ctime())
+		assistant_speak(ctime())
 	if 'show me the news' in voice_data:
 		# connect to api
 		json_data = requests.get('http://newsapi.org/v2/everything?q=bitcoin&from=2020-05-07&sortBy=publishedAt&apiKey=0516986e36f24652926878343df151f0').json()
@@ -83,26 +83,26 @@ def respond(voice_data):
 
 		for each in json_data['articles']:
 			# print(each['title'])
-			mario_speak(each['title'])
+			assistant_speak(each['title'])
 	if 'search' in voice_data:
 		search = record_audio('What do you want to search?')
 		url = 'https://google.com/search?q=' + search
 		webbrowser.get().open(url)
-		mario_speak('Here is what I found for ' + search)
+		assistant_speak('Here is what I found for ' + search)
 	if 'find location' in voice_data:
 		location = record_audio('What is the location?')
 		url = 'https://google.nl/maps/place/' + location + '/&amp;'
 		webbrowser.get().open(url)
-		mario_speak('Here is the location of ' + location)
+		assistant_speak('Here is the location of ' + location)
 	if 'exit' in voice_data:
-		mario_speak('Goodbye!')
+		assistant_speak('Goodbye!')
 		exit()
 	if 'quit' in voice_data:
-		mario_speak('Goodbye!')
+		assistant_speak('Goodbye!')
 		exit()
 
 time.sleep(1)
-mario_speak('How can I help you?')
+assistant_speak('How can I help you?')
 while 1:
 	voice_data = record_audio()
 	respond(voice_data)
