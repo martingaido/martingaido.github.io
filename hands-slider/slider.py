@@ -61,15 +61,18 @@ while True:
 	cv2.rectangle(img, (50, 150), (85, 400), (255,255,255), 2)
 	cv2.rectangle(img, (50, int(finalRangeBar)), (85, 400), (255,255,255), cv2.FILLED)
 
-
+	# Calculate FPS
 	cTime = time.time()
 	fps = 1/(cTime - pTime)
 	pTime = cTime
 
+	# Print FPS Info
 	cv2.putText(img, f'FPS: {int(fps)}', (40, 50), cv2.FONT_HERSHEY_COMPLEX,
 					1, (255,255,255), 2)
 
+	# Rescale Capture
 	frame = rescale_frame(img, percent=50)
-	cv2.imshow("Image", frame)
+
+	cv2.imshow("CAM Capture", frame)
 	cv2.waitKey(1)
 	cv2.destroyAllWindows()
