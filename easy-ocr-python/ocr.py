@@ -3,7 +3,7 @@ import cv2
 from matplotlib import pyplot as plt
 import numpy as np
 
-IMAGE_PATH = 'demo.jpg'
+IMAGE_PATH = 'demo2.jpg'
 #IMAGE_PATH = 'surf.jpeg'
 
 reader = easyocr.Reader(['en'])

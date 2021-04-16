@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Toxicity Classifier JS</title>
+
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
+
+</head>
+<body>
+
+	<!-- Introduction -->
+	<h1>Toxicity Classifier</h1>
+
+	<!-- Input Field -->
+	<textarea type="text" name="text" id="text" rows="10" cols="50"></textarea>
+
+	<br><br>
+
+	<!-- Predict Button -->
+	<button onclick="predict()">Predict</button>
+	<button onclick="reset()">Clear Text</button>
+
+	<script>
+
+		function predict() {
+
+			/* The minimum prediction confidence */
+			const threshold = 0.6;
+
+			/* Load the model and pass the threshold, then predict */
+			toxicity.load(threshold).then(model => {
+
+				const sentences = document.getElementById('text');
+
+				model.classify(sentences.value).then(predictions => {
+
+					// `predictions` is an array of objects, one for each prediction head,
+					// that contains the raw probabilities for each input along with the
+					// final prediction in `match` (either `true` or `false`).
+					// If neither prediction exceeds the threshold, `match` is `null`.
+
+					predictions.forEach((item) => {
+
+						if(item.results[0].match === true) {
+							console.log('Label : ', item.label);
+							console.log('Result: ', item.results[0].match);
+						}
+					});
+				});
+			});
+		}
+
+		function reset() {
+
+			document.getElementById('text').value = '';
+		}
+
+	</script>
+
+</body>
+</html>
